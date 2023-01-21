@@ -1,8 +1,36 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
-
-// const inter = Inter({ subsets: ['latin'] })
+const products = [
+  {
+    id: 1,
+    title: 'White TShirt',
+    img: '/image/w-tshirt.jpg',
+    price: 850,
+    category: 'TShirt'
+  },
+  {
+    id: 2,
+    title: 'Men Jeans',
+    img: '/image/m-jeans.jpg',
+    price: 2800,
+    category: 'Jeans'
+  },
+  {
+    id: 3,
+    title: 'Black TShirt',
+    img: '/image/tshirt.png',
+    price: 1035,
+    category: 'TShirt'
+  },
+  {
+    id: 4,
+    title: 'Women Jans',
+    img: '/image/l-jeans.webp',
+    price: 3844,
+    category: 'Jeans'
+  }
+]
 
 export default function Home() {
   return (
@@ -14,8 +42,80 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className=''>
-        <h1 className='m-5 text-3xl font-bold underline text-center bg-dark'>Hello World</h1>
-      </main>
+        <div className="hero">
+          <section className="text-gray-600 body-font">
+            <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+              <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Before they sold out
+                  <br className="hidden lg:inline-block" />readymade gluten
+                </h1>
+                <p className="mb-8 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic tumeric truffaut hexagon try-hard chambray.</p>
+                <div className="flex justify-center">
+                  <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
+                  <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>
+                </div>
+              </div>
+              <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+                <Image className="object-cover object-center rounded" alt="hero" width={800} height={500} src="/image/136999.jpg" />
+              </div>
+            </div>
+          </section>
+        </div>
+        <section className="text-gray-600 body-font">
+          <h2 className='text-center font-bold text-3xl sm:mt-10 lg:mt-15 text-gray-800'>Features Products</h2>
+          <div className="container px-5 py-24 mx-auto">
+            <div className="flex flex-wrap  -m-4">
+              {products.map((item) => (
+                <div key={item.id} className="lg:w-1/4 md:w-1/2 p-4 w-full">
+                  <a className="block relative h-60 rounded overflow-hidden">
+                    <Image height={200} width={250} alt="ecommerce" className="object-cover object-center w-full h-full block" src={item.img} />
+                  </a>
+                  <div className="mt-4">
+                    <h3 className="text-gray-500 text-xs tracking-widest title-font uppercase mb-1">{item.category}</h3>
+                    <h2 className="text-gray-900 title-font text-lg font-medium">{item.title}</h2>
+                    <p className="mt-1">Rs: {item.price}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className="text-gray-600 body-font">
+          <h2 className='text-center font-bold text-3xl sm:mt-10 lg:mt-15 text-gray-800'>Testimonials</h2>
+          <p className='text-gray-500 small text-center'>What our client's says?</p>
+          <div className="container px-5 py-24 mx-auto">
+            <div className="flex flex-wrap  -m-4">
+              <div className="lg:w-1/3 lg:mb-0 mb-6 p-4">
+                <div className="h-full text-center">
+                  <Image alt="testimonial" className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="/image/michael-dam-mEZ3PoFGs_k-unsplash.jpg" height={100} width={100} />
+                  <p className="leading-relaxed">Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                  <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
+                  <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
+                  <p className="text-gray-500">Senior Product Designer</p>
+                </div>
+              </div>
+              <div className="lg:w-1/3 lg:mb-0 mb-6 p-4 shadow-md">
+                <div className="h-full text-center">
+                  <Image alt="testimonial" className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="/image/michael-dam-mEZ3PoFGs_k-unsplash.jpg" height={100} width={100} />
+                  <p className="leading-relaxed">Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                  <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
+                  <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">ALPER KAMU</h2>
+                  <p className="text-gray-500">UI Develeoper</p>
+                </div>
+              </div>
+              <div className="lg:w-1/3 lg:mb-0 p-4">
+                <div className="h-full text-center">
+                  <Image alt="testimonial" className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="/image/michael-dam-mEZ3PoFGs_k-unsplash.jpg" height={100} width={100} />
+                  <p className="leading-relaxed">Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                  <span className="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
+                  <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">HENRY LETHAM</h2>
+                  <p className="text-gray-500">CTO</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main >
     </>
   )
 }
