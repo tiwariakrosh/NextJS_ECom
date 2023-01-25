@@ -1,31 +1,82 @@
 import Link from 'next/link'
-import React from 'react'
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { RxAvatar } from 'react-icons/rx';
-const Header = () => {
+import React, { useRef } from 'react'
+import { AiFillCloseCircle, AiOutlineDelete, AiOutlineMinus, AiOutlinePlus, AiOutlineShoppingCart } from 'react-icons/ai';
+
+
+const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+    console.log(cart, addToCart, removeFromCart, clearCart, subTotal);
+
+    const toggleCart = () => {
+        if (ref.current.classList.contains('translate-x-full')) {
+            ref.current.classList.add('translate-x-0')
+            ref.current.classList.remove('translate-x-full')
+        }
+        else if (!ref.current.classList.contains('translate-x-full')) {
+            ref.current.classList.add('translate-x-full')
+            ref.current.classList.remove('translate-x-0')
+        }
+    }
+    const ref = useRef();
+
     return (
         <header className="text-gray-600 body-font shadow-md">
             <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row">
                 <Link href={'/'} className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                     </svg>
                     <span className="ml-3 text-xl">Tailblocks</span>
                 </Link>
                 <nav className="md:ml-auto md:mr-auto flex flex-wrap gap-1 items-center text-base justify-center">
                     <Link href={'/About'} className="mr-5 font-medium hover:text-gray-900 cursor-pointer">About</Link >
-                    <Link href={'/Jeans'} className="mr-5 font-medium hover:text-gray-900">Jeans</Link>
+                    <Link href={'/WomenClothing'} className="mr-5 font-medium hover:text-gray-900">Women's</Link>
+                    <Link href={'/Mens'} className="mr-5 font-medium hover:text-gray-900">Men's</Link>
                     <Link href={'/ProductItems'} className="mr-5 font-medium hover:text-gray-900">All Product</Link>
                     <Link href={'/Contact'} className="mr-5 font-medium hover:text-gray-900">Contact</Link>
                 </nav>
                 <div className="right flex align-middle gap-2 absolute right-10">
-                    {/* <RxAvatar /> */}
-                    <AiOutlineShoppingCart className='text-lg mt-1 h-7 w-7' style={{ width: "30px" }} />
+                    <AiOutlineShoppingCart onClick={toggleCart} className='text-lg mt-1 h-7 w-7 cursor-pointer' style={{ width: "30px" }} />
                     <Link href={"/Login"} className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base md:mt-0">Login
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
                             <path d="M5 12h14M12 5l7 7-7 7"></path>
                         </svg>
                     </Link>
+                </div>
+
+                <div ref={ref} className="sidebar w-100 absolute p-3 top-14 right-0 bg-pink-100 h-[95vh] transform translate-x-full">
+                    <h3 className='mr-5 text-center mt-6 font-semibold'>Shopping Cart</h3>
+                    <span onClick={toggleCart} className="absolute top-3 right-1 cursor-pointer text-xl text-pink-300" >
+                        <AiFillCloseCircle />
+                    </span>
+                    {Object.keys(cart).length === 0 &&
+                        <div>
+                            <h4 className='my-4 font-medium'>This cart is empty!</h4>
+                            <button className='flex w-[150px]  justify-center border-0 bg-green-500 py-2 px-4 rounded-full text-white mt-3 mx-2 shadow hover:bg-green-600'>Shop Now</button>
+                        </div>
+                    }
+
+                    {Object.keys(cart).map((k) => {
+                        <>
+                            <ul className=''>
+                                <li key={k} className='flex w-full items-center'>
+                                    <img src={cart[k].image} className='h-10 w-10 mr-1 shadow-sm rounded-sm' alt="" />
+                                    <div className='w-3/5 line-clamp-2'>{cart[k].name}</div>
+
+                                    <div className=' bg-slate-100/100 flex gap-2 p-1 px-2 rounded-full items-center'>
+                                        <AiOutlineMinus className='cursor-pointer' />
+                                        <div className='mx-2'>{cart[k].qty}</div>
+                                        <AiOutlinePlus className='cursor-pointer' />
+                                    </div>
+                                    <div className='w-2/5 ml-2'>Rs: {cart[k].price}</div>
+                                    <AiOutlineDelete className='cursor-pointer text-3xl text-red-500' />
+                                </li>
+                            </ul>
+                            <div className="flex justify-center">
+                                <button onClick={clearCart} className='flex w-[150px] justify-center border-0 bg-red-500 py-2 px-4 rounded-full text-white mt-3 mx-2 shadow hover:bg-red-600'>Clear Cart</button>
+                                <button className='flex w-[150px]  justify-center border-0 bg-green-500 py-2 px-4 rounded-full text-white mt-3 mx-2 shadow hover:bg-green-600'>Checkout</button>
+                            </div>
+                        </>
+                    })}
                 </div>
             </div>
         </header>

@@ -8,15 +8,32 @@
     box-sizing: border-box;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-    font-family: 'Roboto', sans-serif;
+body {
+    overflow-x: hidden;
 }
 
-.prod-img a img {
-    mix-blend-mode: multiply;
-    padding: 0 10px;
+@layer base {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .prod-img a img {
+        mix-blend-mode: multiply;
+        padding: 0 10px;
+        filter: contrast(1.10);
+    }
+
+    h1 {
+        @apply mb-2 text-2xl font-semibold;
+    }
+
+    h2,
+    h3 {
+        @apply mb-1 font-medium;
+    }
 }
