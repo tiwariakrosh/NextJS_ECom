@@ -39,6 +39,7 @@ function Mens() {
                                             <h3 className="text-gray-500 text-xs tracking-widest title-font uppercase mb-1">{item.category}</h3>
                                             <h2 className="text-gray-900 title-font text-lg font-medium line-clamp-2">{item.title}</h2>
                                             <p className="mt-1">Rs: {item.price}</p>
+                                            <p className='mt-1'>S, M, L, XL, XXL</p>
                                         </div>
                                     </div>
                                     : null
