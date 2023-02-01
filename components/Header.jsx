@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useRef } from 'react'
 import { AiFillCloseCircle, AiOutlineMinus, AiOutlinePlus, AiOutlineShoppingCart } from 'react-icons/ai';
-
+import { MdOutlineAccountCircle } from 'react-icons/md';
 
 const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
     // console.log(cart, addToCart, removeFromCart, clearCart, subTotal);
@@ -34,13 +34,9 @@ const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                     <Link href={'/ProductItems'} className="mr-5 font-medium hover:text-gray-900">All Product</Link>
                     <Link href={'/Contact'} className="mr-5 font-medium hover:text-gray-900">Contact</Link>
                 </nav>
-                <div className="right flex align-middle gap-2 absolute right-10">
+                <div className="right flex align-middle gap-4 absolute right-10">
                     <AiOutlineShoppingCart onClick={toggleCart} className='text-lg mt-1 h-7 w-7 cursor-pointer' style={{ width: "30px" }} />
-                    <Link href={"/Login"} className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base md:mt-0">Login
-                        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                    </Link>
+                    <Link href={"/Login"}><MdOutlineAccountCircle className='text-lg mt-1 h-7 w-7 cursor-pointer' /></Link>
                 </div>
 
                 <div ref={ref} className={`sidebar w-100 absolute  p-3 top-14 right-0 bg-pink-100 h-[95vh] transform ${Object.keys(cart).length === 0 ? 'translate-x-full' : 'translate-x-0'}`}>
@@ -48,6 +44,7 @@ const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                     <span onClick={toggleCart} className="absolute top-3 right-1 cursor-pointer text-xl text-pink-300" >
                         <AiFillCloseCircle />
                     </span>
+
                     {Object.keys(cart).length == 0 &&
                         <div>
                             <h4 className='my-4 font-medium'>This cart is empty!</h4>
