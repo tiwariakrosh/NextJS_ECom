@@ -43,7 +43,7 @@ const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                     </Link>
                 </div>
 
-                <div ref={ref} className="sidebar w-100 absolute p-3 top-14 right-0 bg-pink-100 h-[95vh] transform translate-x-full">
+                <div ref={ref} className={`sidebar w-100 absolute  p-3 top-14 right-0 bg-pink-100 h-[95vh] transform ${Object.keys(cart).length === 0 ? 'translate-x-full' : 'translate-x-0'}`}>
                     <h3 className='mr-5 text-center mt-6 font-semibold'>Shopping Cart</h3>
                     <span onClick={toggleCart} className="absolute top-3 right-1 cursor-pointer text-xl text-pink-300" >
                         <AiFillCloseCircle />
@@ -68,6 +68,7 @@ const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                                     </div>
                                     <div className='w-2/5 ml-2'>Rs: {cart[k].price}</div>
                                 </li>
+                                <div className='font-semibold text-lg my-3 text-gray-700'>Subtotal : {subTotal}</div>
                                 <div className="flex justify-center">
                                     <button onClick={clearCart} className='flex w-[150px] justify-center border-0 bg-red-500 py-2 px-4 rounded-full text-white mt-3 mx-2 shadow hover:bg-red-600'>Clear Cart</button>
                                     <Link href={'/Checkout'}> <button className='flex w-[150px]  justify-center border-0 bg-green-500 py-2 px-4 rounded-full text-white mt-3 mx-2 shadow hover:bg-green-600'>Checkout</button></Link>

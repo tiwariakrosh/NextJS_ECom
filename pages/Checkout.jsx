@@ -1,6 +1,10 @@
-import React from 'react'
+import Link from 'next/link'
+import React, { useState } from 'react'
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
-const Checkout = () => {
+
+const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
+
     return (
         <div className='container px-10 lg:px-10 sm:px-5  mt-10'>
             <h1 className='text-2xl text-center font-bold text-gray-600 leading-6'>Checkout</h1>
@@ -68,9 +72,36 @@ const Checkout = () => {
                 </div>
             </div>
             <h2 className='font-bold text-xl mt-4'>Review Cart Item</h2>
+            <div className="sidebar w-100  p-3 bg-blue-50">
+                <h3 className='mr-5 text-center mt-6 font-semibold'>Shopping Cart</h3>
+                {Object.keys(cart).length == 0 &&
+                    <div>
+                        <h4 className='my-4 font-medium'>This cart is empty!</h4>
+                        <Link href={'/ProductItems'}><button className='flex w-[150px]  justify-center border-0 bg-green-500 py-2 px-4 rounded-full text-white mt-3 mx-2 shadow hover:bg-green-600'>Shop Now</button></Link>
+                    </div>
+                }
 
-
-            <button className='py-2 px-8 rounded border-0 shadow-md mt-4 text-white font-semibold bg-green-500 hover:bg-green-600'>Sumit</button>
+                {Object.keys(cart).map((k) => {
+                    return (
+                        <div key={k}>
+                            <li className='flex w-full items-center'>
+                                <img src='/image/m-jeans.jpg' className='h-10 w-10 mr-1 shadow-sm rounded-sm' alt="" />
+                                <div className='w-3/5 line-clamp-2'>{cart[k].name}</div>
+                                <div className=' bg-slate-100/100 flex gap-2 p-1 px-2 rounded-full items-center'>
+                                    <AiOutlineMinus onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant) }} className='cursor-pointer' />
+                                    <div className='mx-2'>{cart[k].qty}</div>
+                                    <AiOutlinePlus onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant) }} className='cursor-pointer' />
+                                </div>
+                                <div className='w-2/5 ml-2'>Rs: {cart[k].price}</div>
+                            </li>
+                            <div className='font-semibold text-lg m-3 text-gray-700'>Subtotal : {subTotal}</div>
+                            <div className="flex justify-center">
+                                <Link href={'/Checkout'}> <button className='flex w-[150px]  justify-center border-0 bg-green-500 py-2 px-4 rounded-full text-white mt-3 mx-2 shadow hover:bg-green-600'>Pay</button></Link>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }
