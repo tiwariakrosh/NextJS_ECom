@@ -1,35 +1,17 @@
 import React from 'react'
-import { useState, useEffect } from "react";
 import Link from 'next/link';
 import mongoose from 'mongoose';
 import Product from "../models/Product"
 
-function Mens({ products }) {
-    // const [data, setData] = useState('');
-    // const getAllData = () => {
-    //     axios
-    //         .get("https://fakestoreapi.com/products")
-    //         .then((response) => {
-    //             // console.log(response.data);
-    //             setData(response.data);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }
-    // useEffect(() => {
-    //     getAllData();
-    // }, []);
-
+function Shirt({ products }) {
     const Pants = true;
-
     return (
         <div>
             <section className="text-gray-600 body-font">
-                <h1 className='text-center font-bold text-3xl sm:mt-10 lg:mt-15 text-gray-800'>All T-Shirts</h1>
+                <h1 className='text-center font-bold text-3xl sm:mt-10 lg:mt-15 text-gray-800'>All shirts</h1>
                 <div className="container px-20 py-24 mx-auto">
                     <div className="flex flex-wrap  -m-4">
-                        {Object.keys(products).length === 0 && <p>Sorry all of the Hoodies are currently out of stock.New stock comming soon!</p>}
+                        {Object.keys(products).length === 0 && <div className='shadow-lg p-5 mx-auto'> <p>Sorry all of the shirt's are currently out of stock.New stock comming soon!</p></div>}
                         {products ?
                             Object.keys(products).map((item) => (
                                 <div key={products[item]._id} className="lg:w-1/4 md:w-1/2 p-4 w-full">
@@ -71,27 +53,27 @@ export async function getServerSideProps(context) {
     if (!mongoose.connections[0].readyState) {
         await mongoose.connect(process.env.MONGO_URL)
     }
-    let products = await Product.find({ category: 'tshirt' })
-    let tshirts = {}
+    let products = await Product.find({ category: 'shirt' })
+    let shirts = {}
     for (let item of products) {
-        if (item.title in tshirts) {
-            if (!tshirts[item.title].color.includes(item.color) && item.availableQty > 0) {
-                tshirts[item.title].color.push(item.color)
+        if (item.title in shirts) {
+            if (!shirts[item.title].color.includes(item.color) && item.availableQty > 0) {
+                shirts[item.title].color.push(item.color)
             }
-            if (!tshirts[item.title].size.includes(item.size) && item.availableQty > 0) {
-                tshirts[item.title].size.push(item.size)
+            if (!shirts[item.title].size.includes(item.size) && item.availableQty > 0) {
+                shirts[item.title].size.push(item.size)
             }
         } else {
-            tshirts[item.title] = JSON.parse(JSON.stringify(item))
+            shirts[item.title] = JSON.parse(JSON.stringify(item))
             if (item.availableQty > 0) {
-                tshirts[item.title].size = [item.size]
-                tshirts[item.title].color = [item.color]
+                shirts[item.title].size = [item.size]
+                shirts[item.title].color = [item.color]
             }
         }
     }
     return {
-        props: { products: JSON.parse(JSON.stringify(tshirts)) }, // will be passed to the page component as props
+        props: { products: JSON.parse(JSON.stringify(shirts)) }, // will be passed to the page component as props
     }
 }
 
-export default Mens
+export default Shirt

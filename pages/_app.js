@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -7,8 +8,8 @@ import HeadeeSpace from './HeadeeSpace'
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
+  const router = useRouter()
   useEffect(() => {
-    console.log('This is useEffect')
     try {
       if (localStorage.getItem("cart")) {
         setCart(JSON.parse(localStorage.getItem("cart")))
@@ -20,13 +21,13 @@ export default function App({ Component, pageProps }) {
     }
   }, [])
 
-  const addToCart = (itemCode, qty, price, name, size, varient) => {
+  const addToCart = (itemCode, qty, price, img, name, size, variant) => {
     let newCart = cart;
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty
     }
     else {
-      newCart[itemCode] = { qty: 1, price, name, size, varient }
+      newCart[itemCode] = { qty: 1, price, img, name, size, variant }
     }
     setCart(newCart)
     console.log(newCart)
@@ -43,7 +44,20 @@ export default function App({ Component, pageProps }) {
     setSubTotal(subt)
   }
 
-  const removeFromCart = (itemCode, qty, price, name, size, varient) => {
+  const buyNow = (itemCode, qty, price, img, name, size, variant) => {
+    let newCart = { itemCode: { qty: 1, price, img, name, size, variant } };
+    setCart(newCart)
+    saveCart(newCart)
+    console.log(newCart)
+    router.push('/Checkout')
+  }
+
+  const clearCart = () => {
+    setCart({})
+    saveCart({})
+  }
+
+  const removeFromCart = (itemCode, qty, price, img, name, size, variant) => {
     let newCart = JSON.parse(JSON.stringify(cart));
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty - qty
@@ -55,16 +69,11 @@ export default function App({ Component, pageProps }) {
     saveCart(newCart)
   }
 
-  const clearCart = () => {
-    setCart({})
-    saveCart({})
-  }
-
   return (
     <>
-      <Header cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
+      <Header buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
       <HeadeeSpace />
-      <Component cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
+      <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} {...pageProps} />
       <Footer />
     </>
   )

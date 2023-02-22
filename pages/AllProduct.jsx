@@ -4,7 +4,7 @@ import Link from 'next/link';
 import mongoose from 'mongoose';
 import Product from "../models/Product"
 
-function Mens({ products }) {
+function AllProduct({ products }) {
     // const [data, setData] = useState('');
     // const getAllData = () => {
     //     axios
@@ -26,10 +26,10 @@ function Mens({ products }) {
     return (
         <div>
             <section className="text-gray-600 body-font">
-                <h1 className='text-center font-bold text-3xl sm:mt-10 lg:mt-15 text-gray-800'>All T-Shirts</h1>
+                <h1 className='text-center font-bold text-3xl sm:mt-10 lg:mt-15 text-gray-800'>All Products</h1>
                 <div className="container px-20 py-24 mx-auto">
                     <div className="flex flex-wrap  -m-4">
-                        {Object.keys(products).length === 0 && <p>Sorry all of the Hoodies are currently out of stock.New stock comming soon!</p>}
+                        {Object.keys(products).length === 0 && <p>Sorry all of the products are currently out of stock.New stock comming soon!</p>}
                         {products ?
                             Object.keys(products).map((item) => (
                                 <div key={products[item]._id} className="lg:w-1/4 md:w-1/2 p-4 w-full">
@@ -71,7 +71,7 @@ export async function getServerSideProps(context) {
     if (!mongoose.connections[0].readyState) {
         await mongoose.connect(process.env.MONGO_URL)
     }
-    let products = await Product.find({ category: 'tshirt' })
+    let products = await Product.find({})
     let tshirts = {}
     for (let item of products) {
         if (item.title in tshirts) {
@@ -94,4 +94,4 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default Mens
+export default AllProduct

@@ -80,17 +80,19 @@ const Checkout = ({ cart, addToCart, removeFromCart, subTotal }) => {
                         <Link href={'/ProductItems'}><button className='flex w-[150px]  justify-center border-0 bg-green-500 py-2 px-4 rounded-full text-white mt-3 mx-2 shadow hover:bg-green-600'>Shop Now</button></Link>
                     </div>
                 }
-
                 {Object.keys(cart).map((k) => {
                     return (
                         <div key={k}>
                             <li className='flex w-full items-center'>
-                                <img src='/image/m-jeans.jpg' className='h-10 w-10 mr-1 shadow-sm rounded-sm' alt="" />
-                                <div className='w-3/5 line-clamp-2'>{cart[k].name}</div>
+                                <img src={cart[k].img} className='h-10 w-10 mr-1 shadow-sm rounded-sm' alt="" />
+                                <div className='w-3/5 flex flex-wrap gap-1'>
+                                    <p className='line-clamp-2'>{cart[k].name}</p>
+                                    <span className='font-semibold'>({cart[k].size}/{cart[k].variant})</span>
+                                </div>
                                 <div className=' bg-slate-100/100 flex gap-2 p-1 px-2 rounded-full items-center'>
-                                    <AiOutlineMinus onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant) }} className='cursor-pointer' />
+                                    <AiOutlineMinus onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].img, cart[k].name, cart[k].size, cart[k].variant) }} className='cursor-pointer' />
                                     <div className='mx-2'>{cart[k].qty}</div>
-                                    <AiOutlinePlus onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant) }} className='cursor-pointer' />
+                                    <AiOutlinePlus onClick={() => { addToCart(k, 1, cart[k].price, cart[k].img, cart[k].name, cart[k].size, cart[k].variant) }} className='cursor-pointer' />
                                 </div>
                                 <div className='w-2/5 ml-2'>Rs: {cart[k].price}</div>
                             </li>
