@@ -1,9 +1,11 @@
 import Link from 'next/link'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { AiFillCloseCircle, AiOutlineMinus, AiOutlinePlus, AiOutlineShoppingCart } from 'react-icons/ai';
 import { MdOutlineAccountCircle } from 'react-icons/md';
 
-const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+const Header = ({ logout, user, cart, addToCart, removeFromCart, clearCart, subTotal }) => {
+    const [dropdown, setDropdown] = useState(false)
+
     const toggleCart = () => {
         if (ref.current.classList.contains('translate-x-full')) {
             ref.current.classList.add('translate-x-0')
@@ -16,6 +18,9 @@ const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
     }
 
     const ref = useRef();
+    // const toogleDropdown = () => {
+    //     setDropdown(!dropdown);
+    // }
 
     return (
         <header className="text-gray-600 body-font shadow-md fixed w-full z-50 top-0 bg-white">
@@ -33,7 +38,25 @@ const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                 </nav>
                 <div className="right flex align-middle gap-4 items-center">
                     <AiOutlineShoppingCart onClick={toggleCart} className='text-lg mt-1 h-7 w-7 cursor-pointer' style={{ width: "30px" }} />
-                    <Link href={"/Login"}><MdOutlineAccountCircle className='text-lg mt-1 h-7 w-7 cursor-pointer' /></Link>
+                    <div onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }}>
+                        {user.value && < MdOutlineAccountCircle className='text-lg mt-1 h-7 w-7 cursor-pointer' />}
+
+                        {dropdown &&
+                            <div onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} className="absolute top-18 shadow bg-white p-4 right-10 z-50">
+                                <ul>
+                                    <li className='cursor-pointer hover:text-red-500'> <a href={'/MyAccount'} >My Account</a></li>
+                                    <li className='cursor-pointer hover:text-red-500'> <a href={'/Orders'}>Orders</a></li>
+                                    <li className='cursor-pointer hover:text-red-500'> <a onClick={logout}>Logout</a></li>
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                    {
+                        !user.value &&
+                        <Link href={"/Login"}>
+                            <button className='bg-red-600 hover:bg-red-700 rounded-full px-4 py-1 text-white'>Login</button>
+                        </Link>
+                    }
                 </div>
 
                 <div ref={ref} className={`sidebar  w-100 absolute  p-3 top-16 right-0 bg-slate-50   max-w-[400px] h-[95vh] transform ${Object.keys(cart).length === 0 ? 'translate-x-full' : 'translate-x-0'}`}>
@@ -41,7 +64,6 @@ const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                     <span onClick={toggleCart} className="absolute top-3 right-3 cursor-pointer text-xl text-pink-300" >
                         <AiFillCloseCircle />
                     </span>
-
                     {Object.keys(cart).length == 0 &&
                         <div>
                             <h4 className='my-4 font-medium'>This cart is empty!</h4>
@@ -74,8 +96,8 @@ const Header = ({ cart, addToCart, removeFromCart, clearCart, subTotal }) => {
                         </>
                     }
                 </div>
-            </div>
-        </header>
+            </div >
+        </header >
     )
 }
 

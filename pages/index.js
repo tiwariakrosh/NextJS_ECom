@@ -54,8 +54,8 @@ export default function Home() {
           <section className="text-gray-600 body-font">
             <div className="container relative z-10 mx-auto flex px-5 py-28 md:flex-row flex-col items-center">
               <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                <h1 className="title-font uppercase sm:text-5xl text-3xl mb-4 font-semibold text-gray-900">Let's create your
-                  <br className="hidden lg:inline-block" />own style
+                <h1 className="title-font uppercase sm:text-5xl text-3xl mb-4 leading-relaxed font-semibold text-gray-900">Let's <span className='text-red-500'>create</span> your
+                  <br className="hidden lg:inline-block" />own <span className='text-red-500'>style</span>
                 </h1>
                 <p className="mb-8 text-xl leading-relaxed">"Fashion is part of the daily air and it changes all the time, with all the events. You can even see the approaching of a revolution in clothes. You can see and feel everything in clothes." <span className='text-lg font-semibold block'>—Diana Vreeland</span></p>
                 <div className="flex justify-center">
@@ -103,13 +103,12 @@ export default function Home() {
                 clickable: true,
               }}
               navigation={false}
-              Autoplay={true}
               modules={[Pagination, Autoplay]}
               className="mySwiper"
             >
               <SwiperSlide>
                 <div className="h-full sm:w-3/5 w-4/5 text-center mb-10 p-8 shadow-md mx-auto bg-white">
-                  <Image alt="testimonial" className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="/image/szocs-viola-hWGxr9xxFWE-unsplash.jpg" height={100} width={100} />
+                  <Image alt="testimonial" className="testi_img w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-4 border-red-500 bg-gray-100" src="/image/szocs-viola-hWGxr9xxFWE-unsplash.jpg" height={100} width={100} />
                   <p className="leading-relaxed">Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
                   <span className="inline-block h-1 w-10 rounded bg-red-500 mt-6 mb-4"></span>
                   <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
@@ -118,7 +117,7 @@ export default function Home() {
               </SwiperSlide>
               <SwiperSlide>
                 <div className="h-full sm:w-3/5 w-4/5 text-center mb-10 p-8 shadow-md mx-auto bg-white">
-                  <Image alt="testimonial" className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="/image/michael-dam-mEZ3PoFGs_k-unsplash.jpg" height={100} width={100} />
+                  <Image alt="testimonial" className="testi_img w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-4 border-red-500 bg-gray-100" src="/image/michael-dam-mEZ3PoFGs_k-unsplash.jpg" height={100} width={100} />
                   <p className="leading-relaxed">Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
                   <span className="inline-block h-1 w-10 rounded bg-red-500 mt-6 mb-4"></span>
                   <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">ALPER KAMU</h2>
@@ -127,7 +126,7 @@ export default function Home() {
               </SwiperSlide>
               <SwiperSlide>
                 <div className="h-full sm:w-3/5 w-4/5 text-center mb-10 p-8 shadow-md mx-auto bg-white">
-                  <Image alt="testimonial" className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100" src="/image/michael-dam-mEZ3PoFGs_k-unsplash.jpg" height={100} width={100} />
+                  <Image alt="testimonial" className="testi_img w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-4 border-red-500 bg-gray-100" src="/image/michael-dam-mEZ3PoFGs_k-unsplash.jpg" height={100} width={100} />
                   <p className="leading-relaxed">Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
                   <span className="inline-block h-1 w-10 rounded bg-red-500 mt-6 mb-4"></span>
                   <h2 className="text-gray-900 font-medium title-font tracking-wider text-sm">HENRY LETHAM</h2>

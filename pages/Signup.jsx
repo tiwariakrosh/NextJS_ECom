@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
     const [name, setName] = useState()
@@ -34,6 +36,10 @@ const Signup = () => {
         setName("")
         setEmail("")
         setPassword("")
+        toast.success('Thank You, Account created Successfully!!', {
+            position: "top-left",
+            autoClose: 3000
+        });
     }
 
     return (
@@ -101,6 +107,10 @@ const Signup = () => {
                                     placeholder="Password"
                                 />
                             </div>
+                            <ToastContainer
+                                position="bottom-left"
+                                autoClose={3000}
+                            />
                         </div>
                         <div>
                             <button

@@ -15,6 +15,7 @@ body {
     font-family: 'Alice', serif;
 }
 
+
 .hero {
     position: relative;
     background: url(../public/image/bg1.jpg) no-repeat center center/cover;
@@ -33,6 +34,10 @@ body {
     z-index: 1;
 }
 
+.hero h1 {
+    line-height: 1.4;
+}
+
 .testimonial .container {
     position: relative;
     background: url(../public/image/bg2.jpg) no-repeat center center/cover;
@@ -42,6 +47,7 @@ body {
 .testimonial .container::before {
     background-color: #000000b6;
 }
+
 
 @media (min-width: 1280px) {
     .container {
